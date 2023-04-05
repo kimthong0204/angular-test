@@ -12,7 +12,7 @@ pipeline {
 
         stage('build dist') {
             steps{
-            sh "ng build --configuration production --aot"
+            sh "npm run build"
             }
         }
         stage('artifacts to s3') {
