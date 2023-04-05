@@ -20,7 +20,7 @@ pipeline {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
                 accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                 secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-                credentialsId: 'AWS_ACCOUNT']]) {
+                credentialsId: 'thonghk1']]) {
                     sh "aws s3 ls"
                     sh "aws s3 mb s3://angular-test-jenkins"
                     sh "aws s3 cp test/dist/test/* s3://angular-test-jenkins"
