@@ -3,7 +3,9 @@ pipeline {
 
     stages {
         stage('build dist') {
+            steps{
             sh "ng build --configuration production --aot"
+            }
         }
         stage('artifacts to s3') {
             try {
