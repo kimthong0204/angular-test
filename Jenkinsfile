@@ -2,6 +2,12 @@ pipeline {
     agent any
 
     stages {
+        stage('install') {
+            steps{
+            sh "npm install"
+            }
+        }
+
         stage('build dist') {
             steps{
             sh "ng build --configuration production --aot"
