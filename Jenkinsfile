@@ -8,7 +8,7 @@ pipeline {
             }
         }
         stage('artifacts to s3') {
-            try {
+            steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
                 accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                 secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
@@ -17,9 +17,7 @@ pipeline {
                     sh "aws s3 mb s3://angular-test-jenkins"
                     sh "aws s3 cp test/dist/test/* s3://angular-test-jenkins"
                 }
-            } catch (err) {
-                sh "echo error is sending"
-            }
+            } 
         }
     }
 }
