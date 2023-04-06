@@ -18,9 +18,9 @@ pipeline {
         stage('artifacts to s3') {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
-                accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-                credentialsId: 'thonghk1']]) {
+                accessKeyVariable: 'AKIA45LVDVLNR7T7ULH2',
+                secretKeyVariable: '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',
+                credentialsId: 's3user']]) {
                     sh "aws s3 ls"
                     sh "aws s3 mb s3://angular-test-jenkins"
                     sh "aws s3 cp test/dist/test/* s3://angular-test-jenkins"
