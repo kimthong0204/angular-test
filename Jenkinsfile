@@ -16,15 +16,11 @@ pipeline {
             }
         }
         stage('artifacts to s3') {
-            steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
-                accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-                credentialsId: 's3user']]) {
-                    sh "aws s3 ls"
-                    sh "aws s3 mb s3://angular-test-jenkins"
-                    sh "aws s3 cp test/dist/test/* s3://angular-test-jenkins"
-                }
+            steps{
+                withAWS(region:'ap-southeast-1',credentials:'s3user') {
+                  sh 'echo "Uploading content with AWS creds"'
+                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'test/dist/test/*', bucket:'angular-test-jenkins')
+                  }  
             } 
         }
     }
